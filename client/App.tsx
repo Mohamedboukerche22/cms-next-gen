@@ -6,23 +6,87 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { Layout } from "@/components/Layout";
 import Index from "./pages/Index";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import {
+  ContestsPage,
+  ProblemsPage,
+  SubmissionsPage,
+  UsersPage,
+  MySubmissionsPage,
+} from "./pages/Placeholder";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/login" element={<Login />} />
+
+            {/* Protected Routes with Layout */}
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Index />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/contests" element={
+              <ProtectedRoute>
+                <Layout>
+                  <ContestsPage />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/problems" element={
+              <ProtectedRoute requiredRole="admin">
+                <Layout>
+                  <ProblemsPage />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/submissions" element={
+              <ProtectedRoute requiredRole="admin">
+                <Layout>
+                  <SubmissionsPage />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/users" element={
+              <ProtectedRoute requiredRole="admin">
+                <Layout>
+                  <UsersPage />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/my-submissions" element={
+              <ProtectedRoute>
+                <Layout>
+                  <MySubmissionsPage />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
+            {/* Catch-all route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
