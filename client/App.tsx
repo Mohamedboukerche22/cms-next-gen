@@ -45,7 +45,7 @@ const App = () => (
             <Route path="/contests" element={
               <ProtectedRoute>
                 <Layout>
-                  <ContestsPage />
+                  <Contests />
                 </Layout>
               </ProtectedRoute>
             } />
