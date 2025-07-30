@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 import {
   Trophy,
   Users,
@@ -22,7 +22,7 @@ import {
   Settings,
   Calendar,
   Code,
-} from 'lucide-react';
+} from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -33,23 +33,25 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
 
   const adminNavItems = [
-    { icon: BarChart3, label: 'Dashboard', path: '/' },
-    { icon: Calendar, label: 'Contests', path: '/contests' },
-    { icon: FileText, label: 'Problems', path: '/problems' },
-    { icon: Upload, label: 'Submissions', path: '/submissions' },
-    { icon: Users, label: 'Users', path: '/users' },
+    { icon: BarChart3, label: "Dashboard", path: "/" },
+    { icon: Calendar, label: "Contests", path: "/contests" },
+    { icon: FileText, label: "Problems", path: "/problems" },
+    { icon: Upload, label: "Submissions", path: "/submissions" },
+    { icon: Users, label: "Users", path: "/users" },
   ];
 
   const contestantNavItems = [
-    { icon: BarChart3, label: 'Dashboard', path: '/' },
-    { icon: Calendar, label: 'Contests', path: '/contests' },
-    { icon: Upload, label: 'My Submissions', path: '/my-submissions' },
+    { icon: BarChart3, label: "Dashboard", path: "/" },
+    { icon: Calendar, label: "Contests", path: "/contests" },
+    { icon: Upload, label: "My Submissions", path: "/my-submissions" },
   ];
 
-  const navItems = user?.role === 'admin' ? adminNavItems : contestantNavItems;
+  const navItems = user?.role === "admin" ? adminNavItems : contestantNavItems;
 
   const getRoleColor = (role: string) => {
-    return role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800';
+    return role === "admin"
+      ? "bg-purple-100 text-purple-800"
+      : "bg-blue-100 text-blue-800";
   };
 
   return (
@@ -79,8 +81,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     to={path}
                     className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
-                        ? 'bg-primary text-primary-foreground'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                        ? "bg-primary text-primary-foreground"
+                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -92,13 +94,17 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* User Menu */}
             <div className="flex items-center space-x-4">
-              <Badge className={getRoleColor(user?.role || '')}>
+              <Badge className={getRoleColor(user?.role || "")}>
                 {user?.role}
               </Badge>
-              
+
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center space-x-2"
+                  >
                     <User className="h-4 w-4" />
                     <span className="hidden sm:inline">{user?.username}</span>
                   </Button>
@@ -137,8 +143,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   to={path}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap ${
                     isActive
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      ? "bg-primary text-primary-foreground"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -162,12 +168,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div className="flex items-center space-x-2">
               <Code className="h-4 w-4 text-gray-400" />
               <span className="text-sm text-gray-500">
-                IOI Contest Management System - Built for competitive programming
+                IOI Contest Management System - Built for competitive
+                programming
               </span>
             </div>
-            <div className="text-sm text-gray-500">
-              © 2024 IOI CMS
-            </div>
+            <div className="text-sm text-gray-500">© 2024 IOI CMS</div>
           </div>
         </div>
       </footer>

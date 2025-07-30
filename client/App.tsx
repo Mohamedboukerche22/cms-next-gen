@@ -34,53 +34,71 @@ const App = () => (
             <Route path="/login" element={<Login />} />
 
             {/* Protected Routes with Layout */}
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Layout>
-                  <Index />
-                </Layout>
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Layout>
+                    <Index />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
 
-            <Route path="/contests" element={
-              <ProtectedRoute>
-                <Layout>
-                  <Contests />
-                </Layout>
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/contests"
+              element={
+                <ProtectedRoute>
+                  <Layout>
+                    <Contests />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
 
-            <Route path="/problems" element={
-              <ProtectedRoute requiredRole="admin">
-                <Layout>
-                  <ProblemsPage />
-                </Layout>
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/problems"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <Layout>
+                    <ProblemsPage />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
 
-            <Route path="/submissions" element={
-              <ProtectedRoute requiredRole="admin">
-                <Layout>
-                  <SubmissionsPage />
-                </Layout>
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/submissions"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <Layout>
+                    <SubmissionsPage />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
 
-            <Route path="/users" element={
-              <ProtectedRoute requiredRole="admin">
-                <Layout>
-                  <UsersPage />
-                </Layout>
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/users"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <Layout>
+                    <UsersPage />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
 
-            <Route path="/my-submissions" element={
-              <ProtectedRoute>
-                <Layout>
-                  <MySubmissionsPage />
-                </Layout>
-              </ProtectedRoute>
-            } />
+            <Route
+              path="/my-submissions"
+              element={
+                <ProtectedRoute>
+                  <Layout>
+                    <MySubmissionsPage />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
 
             {/* Catch-all route */}
             <Route path="*" element={<NotFound />} />

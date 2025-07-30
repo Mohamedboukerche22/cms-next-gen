@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Trophy, User, Lock, AlertCircle } from 'lucide-react';
-import { Navigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Trophy, User, Lock, AlertCircle } from "lucide-react";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
   const { login, user, isLoading } = useAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Redirect if already logged in
@@ -22,19 +28,19 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setIsSubmitting(true);
 
     const success = await login(username, password);
     if (!success) {
-      setError('Invalid username or password');
+      setError("Invalid username or password");
     }
     setIsSubmitting(false);
   };
 
   const demoCredentials = [
-    { role: 'Admin', username: 'admin', password: 'admin123' },
-    { role: 'Contestant', username: 'contestant1', password: 'contest123' },
+    { role: "Admin", username: "admin", password: "admin123" },
+    { role: "Contestant", username: "contestant1", password: "contest123" },
   ];
 
   if (isLoading) {
@@ -106,18 +112,14 @@ export default function Login() {
                 </Alert>
               )}
 
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={isSubmitting}
-              >
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? (
                   <div className="flex items-center space-x-2">
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                     <span>Signing in...</span>
                   </div>
                 ) : (
-                  'Sign In'
+                  "Sign In"
                 )}
               </Button>
             </form>
@@ -134,10 +136,16 @@ export default function Login() {
               <div key={index} className="text-sm">
                 <div className="font-medium text-gray-700">{cred.role}</div>
                 <div className="text-gray-600">
-                  Username: <code className="bg-white px-1 py-0.5 rounded text-xs">{cred.username}</code>
+                  Username:{" "}
+                  <code className="bg-white px-1 py-0.5 rounded text-xs">
+                    {cred.username}
+                  </code>
                 </div>
                 <div className="text-gray-600">
-                  Password: <code className="bg-white px-1 py-0.5 rounded text-xs">{cred.password}</code>
+                  Password:{" "}
+                  <code className="bg-white px-1 py-0.5 rounded text-xs">
+                    {cred.password}
+                  </code>
                 </div>
               </div>
             ))}

@@ -1,8 +1,14 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Construction, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Construction, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface PlaceholderProps {
   title: string;
@@ -10,7 +16,11 @@ interface PlaceholderProps {
   feature: string;
 }
 
-export const Placeholder: React.FC<PlaceholderProps> = ({ title, description, feature }) => {
+export const Placeholder: React.FC<PlaceholderProps> = ({
+  title,
+  description,
+  feature,
+}) => {
   return (
     <div className="max-w-2xl mx-auto py-12">
       <Card className="text-center">
@@ -25,7 +35,8 @@ export const Placeholder: React.FC<PlaceholderProps> = ({ title, description, fe
           <div className="bg-gray-50 p-6 rounded-lg">
             <h3 className="font-semibold mb-2">Coming Soon</h3>
             <p className="text-gray-600">
-              The {feature} feature is planned for future development. This will include:
+              The {feature} feature is planned for future development. This will
+              include:
             </p>
             <ul className="text-left mt-4 space-y-2 text-sm text-gray-600">
               <li>• Full {feature.toLowerCase()} functionality</li>
@@ -34,7 +45,7 @@ export const Placeholder: React.FC<PlaceholderProps> = ({ title, description, fe
               <li>• Mobile-responsive design</li>
             </ul>
           </div>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild variant="outline">
               <Link to="/">
@@ -42,13 +53,12 @@ export const Placeholder: React.FC<PlaceholderProps> = ({ title, description, fe
                 Back to Dashboard
               </Link>
             </Button>
-            <Button disabled>
-              Request Feature Development
-            </Button>
+            <Button disabled>Request Feature Development</Button>
           </div>
-          
+
           <p className="text-sm text-gray-500">
-            Continue prompting to have this page implemented with full functionality.
+            Continue prompting to have this page implemented with full
+            functionality.
           </p>
         </CardContent>
       </Card>

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth, UserRole } from '@/contexts/AuthContext';
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth, UserRole } from "@/contexts/AuthContext";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ interface ProtectedRouteProps {
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   requiredRole,
-  redirectTo = '/login',
+  redirectTo = "/login",
 }) => {
   const { user, isLoading } = useAuth();
 
@@ -31,7 +31,9 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Access Denied</h2>
+          <h2 className="text-2xl font-bold text-red-600 mb-4">
+            Access Denied
+          </h2>
           <p className="text-gray-600 mb-4">
             You don't have permission to access this page.
           </p>

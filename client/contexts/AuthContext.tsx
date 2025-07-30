@@ -1,6 +1,12 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
-export type UserRole = 'admin' | 'contestant';
+export type UserRole = "admin" | "contestant";
 
 export interface User {
   id: string;
@@ -21,7 +27,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
@@ -36,28 +42,42 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     // Check for stored authentication on app load
-    const storedUser = localStorage.getItem('ioi_cms_user');
+    const storedUser = localStorage.getItem("ioi_cms_user");
     if (storedUser) {
       try {
         const userData = JSON.parse(storedUser);
         setUser(userData);
       } catch (error) {
-        console.error('Error parsing stored user data:', error);
-        localStorage.removeItem('ioi_cms_user');
+        console.error("Error parsing stored user data:", error);
+        localStorage.removeItem("ioi_cms_user");
       }
     }
     setIsLoading(false);
   }, []);
 
-  const login = async (username: string, password: string): Promise<boolean> => {
+  const login = async (
+    username: string,
+    password: string,
+  ): Promise<boolean> => {
     setIsLoading(true);
     try {
       // For MVP, we'll use hardcoded credentials
       // In production, this would make an API call
-      const mockUsers: Record<string, { password: string; role: UserRole; email?: string }> = {
-        'admin': { password: 'admin123', role: 'admin', email: 'admin@ioi.org' },
-        'contestant1': { password: 'contest123', role: 'contestant', email: 'contestant1@example.com' },
-        'contestant2': { password: 'contest123', role: 'contestant', email: 'contestant2@example.com' },
+      const mockUsers: Record<
+        string,
+        { password: string; role: UserRole; email?: string }
+      > = {
+        admin: { password: "admin123", role: "admin", email: "admin@ioi.org" },
+        contestant1: {
+          password: "contest123",
+          role: "contestant",
+          email: "contestant1@example.com",
+        },
+        contestant2: {
+          password: "contest123",
+          role: "contestant",
+          email: "contestant2@example.com",
+        },
       };
 
       const userData = mockUsers[username];
@@ -69,15 +89,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           email: userData.email,
         };
         setUser(user);
-        localStorage.setItem('ioi_cms_user', JSON.stringify(user));
+        localStorage.setItem("ioi_cms_user", JSON.stringify(user));
         setIsLoading(false);
         return true;
       }
-      
+
       setIsLoading(false);
       return false;
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       setIsLoading(false);
       return false;
     }
@@ -85,7 +105,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('ioi_cms_user');
+    localStorage.removeItem("ioi_cms_user");
   };
 
   const value = {
